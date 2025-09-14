@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -27,6 +28,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 
 val Background = Color(0xFF0B1020)
 val Surface    = Color(0xFF151B2E)
@@ -56,8 +59,16 @@ data class Cripto(val nombre: String, val precio: String, val logoUrl: String)
 
 @Composable
 fun ImagenInternet(url: String, tamano: Dp = 22.dp) {
+    val context = LocalContext.current
+    val request = ImageRequest.Builder(context)
+        .data(url)
+        .diskCachePolicy(CachePolicy.ENABLED) // cache en disco
+        .networkCachePolicy(CachePolicy.ENABLED) // permite red
+        .crossfade(true)
+        .build()
+
     AsyncImage(
-        model = url,
+        model = request,
         contentDescription = null,
         modifier = Modifier
             .size(tamano)
@@ -72,15 +83,15 @@ fun ImagenInternet(url: String, tamano: Dp = 22.dp) {
 fun Home() {
     val listaCrypto = remember {
         listOf(
-            Cripto("Bitcoin", "$109,797.37", "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=030"),
-            Cripto("Ethereum", "$4,321.21", "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=030"),
-            Cripto("Pepe", "$0,00001173", "https://cryptologos.cc/logos/pepe-pepe-logo.png?v=030"),
-            Cripto("Monero", "$287,30", "https://cryptologos.cc/logos/monero-xmr-logo.png?v=030"),
-            Cripto("BNB", "$845.0000", "https://cryptologos.cc/logos/bnb-bnb-logo.png?v=030"),
-            Cripto("Solana", "$201.8500", "https://cryptologos.cc/logos/solana-sol-logo.png?v=030"),
-            Cripto("USDC", "$0.9998", "https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=030"),
-            Cripto("Dogecoin", "$0.1320", "https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=030"),
-            Cripto("TestLogo", "$123", "https://cryptologos.cc/logos/tron-trx-logo.png?v=030")
+            Cripto("Bitcoin", "$109,797.37", "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"),
+            Cripto("Ethereum", "$4,321.21", "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"),
+            Cripto("Pepe", "$0,00001173", "https://assets.coingecko.com/coins/images/27821/large/pepe.png?1658900787"),
+            Cripto("Monero", "$287,30", "https://assets.coingecko.com/coins/images/69/large/monero.png?1547033729"),
+            Cripto("BNB", "$845.0000", "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_1.png?1669052939"),
+            Cripto("Solana", "$201.8500", "https://assets.coingecko.com/coins/images/4128/large/solana.png?1640133422"),
+            Cripto("USDC", "$0.9998", "https://assets.coingecko.com/coins/images/6319/large/usdc.png?1578389474"),
+            Cripto("Dogecoin", "$0.1320", "https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1547792256"),
+            Cripto("TRON", "$0.3630", "https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1593458246")
         )
     }
 
