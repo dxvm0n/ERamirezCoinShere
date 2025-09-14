@@ -85,13 +85,14 @@ fun Home() {
         listOf(
             Cripto("Bitcoin", "$109,797.37", "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"),
             Cripto("Ethereum", "$4,321.21", "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"),
-            Cripto("Pepe", "$0,00001173", "https://assets.coingecko.com/coins/images/27821/large/pepe.png?1658900787"),
-            Cripto("Monero", "$287,30", "https://assets.coingecko.com/coins/images/69/large/monero.png?1547033729"),
-            Cripto("BNB", "$845.0000", "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_1.png?1669052939"),
+            Cripto("Floki", "$0.00019", "https://assets.coingecko.com/coins/images/16746/large/PNG_image.png?1703749547"),
+            Cripto("Baby Doge Coin", "$0.0000000012", "https://assets.coingecko.com/coins/images/16125/large/Baby_Doge.png?1623044048"),
+            Cripto("Bonk", "$0.000022", "https://assets.coingecko.com/coins/images/28600/large/bonk.jpg?1696527587"),
             Cripto("Solana", "$201.8500", "https://assets.coingecko.com/coins/images/4128/large/solana.png?1640133422"),
             Cripto("USDC", "$0.9998", "https://assets.coingecko.com/coins/images/6319/large/usdc.png?1578389474"),
             Cripto("Dogecoin", "$0.1320", "https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1547792256"),
-            Cripto("TRON", "$0.3630", "https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1593458246")
+            Cripto("TRON", "$0.3630", "https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1593458246"),
+            Cripto("Shiba Inu", "$0.000024", "https://assets.coingecko.com/coins/images/11939/large/shiba.png?1596113034")
         )
     }
 
