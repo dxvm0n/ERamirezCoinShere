@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
@@ -18,7 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -58,9 +61,12 @@ fun ImagenInternet(url: String, tamano: Dp = 22.dp) {
         contentDescription = null,
         modifier = Modifier
             .size(tamano)
-            .clip(RoundedCornerShape(6.dp))
+            .clip(RoundedCornerShape(6.dp)),
+        placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+        error = painterResource(id = R.drawable.ic_launcher_foreground)
     )
 }
+
 
 @Composable
 fun Home() {
@@ -74,7 +80,7 @@ fun Home() {
             Cripto("Solana", "$201.8500", "https://cryptologos.cc/logos/solana-sol-logo.png?v=030"),
             Cripto("USDC", "$0.9998", "https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=030"),
             Cripto("Dogecoin", "$0.1320", "https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=030"),
-            Cripto("TRON", "$0.3630", "https://cryptologos.cc/logos/tron-trx-logo.png?v=030"),
+            Cripto("TestLogo", "$123", "https://cryptologos.cc/logos/tron-trx-logo.png?v=030")
         )
     }
 
@@ -118,6 +124,11 @@ fun Home() {
                 color = TextDim.copy(alpha = 0.5f)
             )
         }
+
+        itemsIndexed(listaCrypto) { index, coin ->
+            crypto(index + 1, coin)
+            Spacer(Modifier.height(10.dp))
+        }
     }
 }
 
@@ -132,6 +143,51 @@ fun globalinfo(titulo: String, valor: String) {
             Text(titulo, color = TextDim, fontSize = 12.sp)
             Spacer(Modifier.height(8.dp))
             Text(valor, color = TextMain, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
+        }
+    }
+}
+
+@Composable
+fun crypto(posicion: Int, cripto: Cripto) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = Surface),
+        shape = RoundedCornerShape(15.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 15.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = posicion.toString(),
+                color = TextDim,
+                fontSize = 15.sp,
+                modifier = Modifier.width(20.dp)
+            )
+
+            ImagenInternet(url = cripto.logoUrl)
+
+            Spacer(Modifier.width(12.dp))
+
+            Text(
+                text = cripto.nombre,
+                color = TextMain,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Text(
+                text = cripto.precio,
+                color = TextMain,
+                fontSize = 15.sp,
+                modifier = Modifier.width(120.dp),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Start
+            )
         }
     }
 }
